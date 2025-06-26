@@ -1,0 +1,16 @@
+<h2>Register</h2>
+
+<form (ngSubmit)="onRegister()" #registerForm="ngForm">
+  <div class="mb-3">
+    <label for="userId" class="form-label">User ID</label>
+    <input type="text" class="form-control" id="userId" [(ngModel)]="user.user_id" name="user_id" required>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Register</button>
+</form>
+
+<!-- Show the generated password and QR code -->
+<div *ngIf="registrationResult" class="mt-4">
+  <p><strong>Password:</strong> {{ registrationResult.password }}</p>
+  <img [src]="'data:image/png;base64,' + registrationResult.qr_code_base64" alt="QR Code" />
+</div>
