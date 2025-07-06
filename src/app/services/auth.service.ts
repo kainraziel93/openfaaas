@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private baseUrl = 'http://192.168.56.101:8080/function';
+  private baseUrl = 'http://localhost:8080/function';
 
   constructor(private http: HttpClient) {}
 
@@ -30,6 +30,16 @@ export class AuthService {
     const url = `${this.baseUrl}/password-generator`;
     const headers = this.getAuthHeaders();
 
-    return this.http.post(url, user, { headers });
+    return this.http.post(url, user);
   }
+
+  
+setupTwoFA(user: { user_id: string }): Observable<any> {
+  const url = `${this.baseUrl}/twofa-generator`;
+  const headers = this.getAuthHeaders();
+
+  return this.http.post(url, user, { headers });
+}
+
+
 }
